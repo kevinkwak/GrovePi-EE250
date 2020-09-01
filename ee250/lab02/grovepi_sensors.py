@@ -31,6 +31,8 @@ be true"""
 if __name__ == '__main__':
     sensor = 4    # D4
     pot = 0       # A0
+    line1 = ""
+    line2 = ""
 
 
     while True:
@@ -44,9 +46,13 @@ if __name__ == '__main__':
 
         print(sensor_value)
         print(pot_value)
-        setText(str(pot_value) + "cm\n" + str(sensor_value) + "cm")
-        setRGB(0,255,0)
+        line1 = "{:>5s}".format(str(pot_value) + "cm")
+        line2 = "{:>5s}".format(str(sensor_value) + "cm")
+        #setRGB(0,255,0)
+        #setText_norefresh(line1 + "          \n" + line2)
         if sensor_value < pot_value:
             setRGB(255,0,0)
-            setText(str(pot_value) + "cm OBJ PRES\n" + str(sensor_value) + "cm")
-
+            setText_norefresh(line1 + " OBJ PRES\n" + line2)
+        else:
+            setRGB(0,255,0)
+            setText_norefresh(line1 + "          \n" + line2)
